@@ -32,6 +32,8 @@ public class ShapesManager : MonoBehaviour
 
     public SoundManager soundManager;
 
+    private UIManager _uiManager;
+
     void Awake()
     {
         DebugText.enabled = ShowDebugInfo;
@@ -45,6 +47,14 @@ public class ShapesManager : MonoBehaviour
         InitializeCandyAndSpawnPositions();
 
         StartCheckForPotentialMatches();
+
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        if (_uiManager == null)
+        {
+            Debug.LogError("UI Manager is NUll");
+        }
+
+        
     }
 
     /// <summary>
@@ -424,6 +434,13 @@ public class ShapesManager : MonoBehaviour
     {
         score += amount;
         ShowScore();
+
+        if(score >= 10000)
+        {
+            Debug.Log("Player Wins!");
+            PlayerWins();
+
+        }
     }
 
     private void ShowScore()
@@ -545,6 +562,10 @@ public class ShapesManager : MonoBehaviour
         throw new System.Exception("Wrong type, check your premade level");
     }
 
+    private void PlayerWins()
+    {
+        _uiManager.PlayerWinsSequence();
+    }
 
 
 }
