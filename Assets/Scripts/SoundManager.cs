@@ -6,7 +6,8 @@ public class SoundManager : MonoBehaviour {
     //crincle sound found here: http://freesound.org/people/volivieri/sounds/37171/
 
     //public AudioClip crincleAudioClip;
-    public AudioSource crincle;
+    [SerializeField]
+    private AudioSource crincle;
 
 
     /*void Awake()

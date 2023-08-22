@@ -5,19 +5,27 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public void LoadMainGame()
+    public enum GameScenes
     {
-        SceneManager.LoadScene(1);
-    }
-
-    public void LoadSettingsMenu()
-    {
-        SceneManager.LoadScene(2);
+        MainMenu, //0
+        mainGame, //1
+        SettingsMenu, //2
     }
 
     public void LoadMainMenu()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene((int)GameScenes.MainMenu);
     }
+
+    public void LoadMainGame()
+    {
+        SceneManager.LoadScene((int)GameScenes.mainGame);
+    }
+
+    public void LoadSettingsMenu()
+    {
+        SceneManager.LoadScene((int)GameScenes.SettingsMenu);
+    }
+
 
 }
