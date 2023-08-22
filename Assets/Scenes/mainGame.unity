@@ -940,7 +940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7f14039170f5343babba41587a61c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crincleAudioClip: {fileID: 8300000, guid: 3f138b0e318244443aee9bb88c46891a, type: 3}
+  crincle: {fileID: 1624638384}
 --- !u!82 &1624638384
 AudioSource:
   m_ObjectHideFlags: 0
@@ -950,7 +950,8 @@ AudioSource:
   m_GameObject: {fileID: 1624638382}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: f2081dd5f9fdad449a9924db500054a5,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 3f138b0e318244443aee9bb88c46891a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
