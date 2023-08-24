@@ -7,28 +7,30 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField]
     private Text _winText;
+
     [SerializeField]
     private Text _loseText;
+
     [SerializeField]
-    private Text _LevelText;
+    private Text _levelText;
+
     [SerializeField]
     private Text _timerText;
+
     [SerializeField]
     private Button _nextLevelButton;
+
     [SerializeField]
     private Button _restartLevelButton;
 
-    // Start is called before the first frame update
     void Start()
     {
         _winText.gameObject.SetActive(false);
         _loseText.gameObject.SetActive(false);
         _nextLevelButton.gameObject.SetActive(false);
         _restartLevelButton.gameObject.SetActive(false);
-        
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -65,6 +67,6 @@ public class UIManager : MonoBehaviour
 
     public void LevelText(int currentLevel)
     {
-        _LevelText.text = "Level: " + currentLevel.ToString();
+        _levelText.text = "Level: " + currentLevel.ToString();
     }
 }

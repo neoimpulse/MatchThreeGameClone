@@ -7,6 +7,13 @@ using UnityEngine.UI;
 
 public class ShapesManager : MonoBehaviour
 {
+    [SerializeField]
+    private UIManager _uiManager;
+
+    [SerializeField]
+    private GameManager _gameManager;
+
+
     public Text DebugText, ScoreText;
     public bool ShowDebugInfo = false;
     //candy graphics taken from http://opengameart.org/content/candy-pack-1
@@ -32,8 +39,6 @@ public class ShapesManager : MonoBehaviour
 
     public SoundManager soundManager;
 
-    private UIManager _uiManager;
-    private GameManager _gameManager;
 
     void Awake()
     {
@@ -48,14 +53,6 @@ public class ShapesManager : MonoBehaviour
         InitializeCandyAndSpawnPositions();
 
         StartCheckForPotentialMatches();
-
-        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
-        if (_uiManager == null)
-        {
-            Debug.LogError("UI Manager is NUll");
-        }
-        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-
         
     }
 

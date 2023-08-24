@@ -1063,7 +1063,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _winText: {fileID: 1343832516}
   _loseText: {fileID: 717034990}
-  _LevelText: {fileID: 1317211453}
+  _levelText: {fileID: 0}
   _timerText: {fileID: 136869968}
   _nextLevelButton: {fileID: 184882154}
   _restartLevelButton: {fileID: 1121668354}
@@ -1472,6 +1472,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc043a35351bec840a343783f285c0aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _uiManager: {fileID: 1066478622}
+  _gameManager: {fileID: 1497653398}
   DebugText: {fileID: 1816048249}
   ScoreText: {fileID: 1807116963}
   ShowDebugInfo: 0
@@ -1537,8 +1539,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da9f6a309b40e724ba171ec47c0a5303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingTime: 120
-  currentLevel: 1
+  _startingTime: 60
+  _currentLevel: 1
+  _UIManager: {fileID: 1066478622}
+  _shapesManager: {fileID: 1363272349}
 --- !u!4 &1497653399
 Transform:
   m_ObjectHideFlags: 0

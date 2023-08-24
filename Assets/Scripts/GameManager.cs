@@ -4,25 +4,26 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private float _currentTime = 0;
     [SerializeField]
-    private float startingTime = 60f;
-    [SerializeField]
-    private int currentLevel = 1;
+    private float _startingTime = 60f;
 
+    [SerializeField]
+    private int _currentLevel = 1;
+
+    [SerializeField]
     private UIManager _UIManager;
+
+    [SerializeField]
     private ShapesManager _shapesManager;
 
-    // Start is called before the first frame update
+    private float _currentTime = 0;
+
+
     void Start()
     {
-        _UIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
-        _shapesManager = GameObject.Find("ShapesManager").GetComponent<ShapesManager>();
-        _currentTime = startingTime;
-
+        _currentTime = _startingTime;
     }
 
-    // Update is called once per frame
     void Update()
     {
         CountdownTimer();
@@ -40,8 +41,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-    public void LoseState()
+    private void LoseState()
     {
         _UIManager.PlayerLoseSequence();
         Time.timeScale = 0;
@@ -52,28 +52,27 @@ public class GameManager : MonoBehaviour
         _UIManager.PlayerWinsSequence();
         Time.timeScale = 0;
     }
-
-    public void NextLevel()
+    private void LevelUpdate()
     {
         Time.timeScale = 1;
-        currentLevel += 1;
-        _UIManager.LevelText(currentLevel);
-        _currentTime = startingTime;
-        _UIManager.NextLevelUIReset();
+        _currentTime = _startingTime;
         _shapesManager.InitializeTypesOnPrefabShapesAndBonuses();
         _shapesManager.InitializeCandyAndSpawnPositions();
         _shapesManager.StartCheckForPotentialMatches();
         _shapesManager.InitializeVariables();
     }
 
-    public void RestartLevel()
+    private void NextLevel()
     {
-        Time.timeScale = 1;
-        _currentTime = startingTime;
+        _currentLevel += 1;
+        _UIManager.LevelText(_currentLevel);
+        _UIManager.NextLevelUIReset();
+        LevelUpdate();
+    }
+
+    private void RestartLevel()
+    {
         _UIManager.RestartLevelUIReset();
-        _shapesManager.InitializeTypesOnPrefabShapesAndBonuses();
-        _shapesManager.InitializeCandyAndSpawnPositions();
-        _shapesManager.StartCheckForPotentialMatches();
-        _shapesManager.InitializeVariables();
+        LevelUpdate();
     }
 }
