@@ -89,43 +89,34 @@ public class UIManager : MonoBehaviour
 
     public void OptionsMenuButton()
     {
-        if (_isOptionsMenuOpen == false)
+        if (!_isOptionsMenuOpen)
         {
-            OpenOptionsMenu();
+            ShowOptionsMenu(true);
         }
-        else if (_isOptionsMenuOpen == true)
+        else if (_isOptionsMenuOpen)
         {
-            CloseOptionsMenu();
+            ShowOptionsMenu(false);
         }
     }
 
-    private void OpenOptionsMenu()
+    private void ShowOptionsMenu(bool active)
     {
-        _restartButton.gameObject.SetActive(true);
-        _premadeLevelButton.gameObject.SetActive(true);
-        _optionsMenuBackground.gameObject.SetActive(true);
-        _isOptionsMenuOpen = true;
-        Time.timeScale = 0;
-    }
-
-    private void CloseOptionsMenu()
-    {
-        _restartButton.gameObject.SetActive(false);
-        _premadeLevelButton.gameObject.SetActive(false);
-        _optionsMenuBackground.gameObject.SetActive(false);
-        _isOptionsMenuOpen = false;
-        Time.timeScale = 1;
+        _restartButton.gameObject.SetActive(active);
+        _premadeLevelButton.gameObject.SetActive(active);
+        _optionsMenuBackground.gameObject.SetActive(active);
+        _isOptionsMenuOpen = active;
+        Time.timeScale = active ? 0 : 1;
     }
 
     public void RestartButton()
     {
-        CloseOptionsMenu();
+        ShowOptionsMenu(false);
         _shapesManager.InitializeCandyAndSpawnPositions();
     }
 
     public void PremadeLevelButton()
     {
-        CloseOptionsMenu();        
+        ShowOptionsMenu(false);      
         _shapesManager.InitializeCandyAndSpawnPositionsFromPremadeLevel();
     }
 }
