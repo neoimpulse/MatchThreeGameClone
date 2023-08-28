@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     private float _startingTime = 60f;
 
     [SerializeField]
-    private int _currentLevel = 1;
+    public int _currentLevel;
 
     [SerializeField]
     private UIManager _UIManager;
@@ -16,17 +16,43 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private ShapesManager _shapesManager;
 
-    private float _currentTime = 0;
+    [SerializeField]
+    private MainMenu _mainMenu;
 
+    private float _currentTime = 0;
 
     void Start()
     {
         _currentTime = _startingTime;
+
+        Load();
+        if (_currentLevel == 0)
+        {
+            _currentLevel = 1;
+            _UIManager.LevelText(_currentLevel);
+        }
+
     }
 
     void Update()
     {
         CountdownTimer();
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            print(_shapesManager.score);
+            print(_currentLevel);
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            Save();
+        }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Load();
+        }
     }
 
     private void CountdownTimer()
@@ -74,5 +100,34 @@ public class GameManager : MonoBehaviour
     {
         _UIManager.RestartLevelUIReset();
         LevelUpdate();
+    }
+
+    private void Save()
+    {
+        PlayerPrefs.SetInt("savedLevel", _currentLevel);
+        PlayerPrefs.SetFloat("savedTime", _currentTime);
+        PlayerPrefs.SetInt("savedScore", _shapesManager.score);
+    }
+
+    private void Load()
+    {
+        _currentLevel = PlayerPrefs.GetInt("savedLevel");
+        _currentTime = PlayerPrefs.GetFloat("savedTime");
+        _shapesManager.score = PlayerPrefs.GetInt("savedScore");
+        _UIManager.LevelText(_currentLevel);
+        _shapesManager.ShowScore();
+    }
+
+    public void ExitWithSave()
+    {
+        Save();
+        Time.timeScale = 1;
+        _mainMenu.LoadMainMenu();
+    }
+
+    public void ExitWithoutSave()
+    {
+        Time.timeScale = 1;
+        _mainMenu.LoadMainMenu();
     }
 }
