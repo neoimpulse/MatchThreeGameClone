@@ -23,17 +23,29 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Button _restartLevelButton;
 
+    [SerializeField]
+    private Button _restartButton;
+
+    [SerializeField]
+    private Button _premadeLevelButton;
+
+    [SerializeField]
+    private Image _optionsMenuBackground;
+
+    [SerializeField]
+    private ShapesManager _shapesManager;
+
+    private bool _isOptionsMenuOpen;
+
     void Start()
     {
         _winText.gameObject.SetActive(false);
         _loseText.gameObject.SetActive(false);
         _nextLevelButton.gameObject.SetActive(false);
         _restartLevelButton.gameObject.SetActive(false);
-    }
-
-    void Update()
-    {
-        
+        _restartButton.gameObject.SetActive(false);
+        _premadeLevelButton.gameObject.SetActive(false);
+        _optionsMenuBackground.gameObject.SetActive(false);
     }
 
     public void PlayerWinsSequence()
@@ -68,5 +80,38 @@ public class UIManager : MonoBehaviour
     public void LevelText(int currentLevel)
     {
         _levelText.text = "Level: " + currentLevel.ToString();
+    }
+
+    public void OptionsMenuButton()
+    {
+        if (!_isOptionsMenuOpen)
+        {            
+            ShowOptionsMenu(true);
+        }
+        else if (_isOptionsMenuOpen)
+        {
+            ShowOptionsMenu(false);
+        }        
+    }
+
+    private void ShowOptionsMenu(bool active)
+    {
+        _restartButton.gameObject.SetActive(active);
+        _premadeLevelButton.gameObject.SetActive(active);
+        _optionsMenuBackground.gameObject.SetActive(active);
+        _isOptionsMenuOpen = active;
+        Time.timeScale = active ? 0 : 1;
+    }
+
+    public void RestartButton()
+    {
+        ShowOptionsMenu(false);
+        _shapesManager.InitializeCandyAndSpawnPositions();
+    }
+
+    public void PremadeLevelButton()
+    {
+        ShowOptionsMenu(false);      
+        _shapesManager.InitializeCandyAndSpawnPositionsFromPremadeLevel();
     }
 }
