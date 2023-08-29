@@ -55,11 +55,6 @@ public class UIManager : MonoBehaviour
         _optionsMenuBackground.gameObject.SetActive(false);
     }
 
-    void Update()
-    {
-
-    }
-
     public void PlayerWinsSequence()
     {
         _winText.gameObject.SetActive(true);
@@ -97,13 +92,13 @@ public class UIManager : MonoBehaviour
     public void OptionsMenuButton()
     {
         if (!_isOptionsMenuOpen)
-        {
+        {            
             ShowOptionsMenu(true);
         }
         else if (_isOptionsMenuOpen)
         {
             ShowOptionsMenu(false);
-        }
+        }        
     }
 
     private void ShowOptionsMenu(bool active)
