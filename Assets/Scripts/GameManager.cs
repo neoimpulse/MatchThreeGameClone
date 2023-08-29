@@ -26,12 +26,13 @@ public class GameManager : MonoBehaviour
         _currentTime = _startingTime;
 
         Load();
+
         if (_currentLevel == 0)
         {
             _currentLevel = 1;
+            _currentTime = _startingTime;
             _UIManager.LevelText(_currentLevel);
         }
-
     }
 
     void Update()
