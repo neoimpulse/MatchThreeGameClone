@@ -35,7 +35,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private ShapesManager _shapesManager;
 
-    private bool _isOptionsMenuOpen = false;
+    private bool _isOptionsMenuOpen;
 
     void Start()
     {
@@ -46,11 +46,6 @@ public class UIManager : MonoBehaviour
         _restartButton.gameObject.SetActive(false);
         _premadeLevelButton.gameObject.SetActive(false);
         _optionsMenuBackground.gameObject.SetActive(false);
-    }
-
-    void Update()
-    {
-
     }
 
     public void PlayerWinsSequence()
@@ -90,13 +85,13 @@ public class UIManager : MonoBehaviour
     public void OptionsMenuButton()
     {
         if (!_isOptionsMenuOpen)
-        {
+        {            
             ShowOptionsMenu(true);
         }
         else if (_isOptionsMenuOpen)
         {
             ShowOptionsMenu(false);
-        }
+        }        
     }
 
     private void ShowOptionsMenu(bool active)
