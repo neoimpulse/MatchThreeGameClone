@@ -45,7 +45,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        _startLevelText.text = "Level: " + _gameManager._currentLevel;
+        _startLevelText.text = "Level: " + _gameManager.CurrentLevel;
         _winText.gameObject.SetActive(false);
         _loseText.gameObject.SetActive(false);
         _nextLevelButton.gameObject.SetActive(false);

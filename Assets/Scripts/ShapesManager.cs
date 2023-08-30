@@ -13,7 +13,7 @@ public class ShapesManager : MonoBehaviour
     [SerializeField]
     private GameManager _gameManager;
 
-    public int score;
+    public int Score;
     public Text DebugText, ScoreText;
     public bool ShowDebugInfo = false;
     //candy graphics taken from http://opengameart.org/content/candy-pack-1
@@ -426,16 +426,16 @@ public class ShapesManager : MonoBehaviour
 
     public void InitializeVariables()
     {
-        score = 0;
+        Score = 0;
         ShowScore();
     }
 
     private void IncreaseScore(int amount)
     {
-        score += amount;
+        Score += amount;
         ShowScore();
 
-        if(score >= 10000)
+        if(Score >= 10000)
         {
             Debug.Log("Player Wins!");
             _gameManager.WinState();
@@ -446,7 +446,7 @@ public class ShapesManager : MonoBehaviour
 
     public void ShowScore()
     {
-        ScoreText.text = "Score: " + score.ToString();
+        ScoreText.text = "Score: " + Score.ToString();
     }
 
     /// <summary>
