@@ -2070,7 +2070,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _uiManager: {fileID: 1066478622}
   _gameManager: {fileID: 1497653398}
-  score: 0
+  Score: 0
   DebugText: {fileID: 1816048249}
   ScoreText: {fileID: 1807116963}
   ShowDebugInfo: 0
@@ -2272,10 +2272,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startingTime: 60
-  _currentLevel: 5
   _UIManager: {fileID: 1066478622}
   _shapesManager: {fileID: 1363272349}
   _mainMenu: {fileID: 1497653400}
+  CurrentLevel: 0
 --- !u!4 &1497653399
 Transform:
   m_ObjectHideFlags: 0

@@ -89,12 +89,12 @@ public class GameManager : MonoBehaviour
         _shapesManager.InitializeTypesOnPrefabShapesAndBonuses();
         _shapesManager.InitializeCandyAndSpawnPositions();
         _shapesManager.StartCheckForPotentialMatches();
-        _shapesManager.InitializeVariables();
+       // _shapesManager.InitializeVariables();
     }
 
     private void NextLevel()
     {
-        CurrentLevel += 1;
+        CurrentLevel ++;
         _UIManager.LevelText(CurrentLevel);
         _UIManager.NextLevelUIReset();
         LevelUpdate();
