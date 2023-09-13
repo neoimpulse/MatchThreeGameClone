@@ -35,10 +35,17 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private ShapesManager _shapesManager;
 
-    private bool _isOptionsMenuOpen;
+    [SerializeField]
+    private GameManager _gameManager;
+
+    [SerializeField]
+    private Text _startLevelText;
+
+    private bool _isOptionsMenuOpen = false;
 
     void Start()
     {
+        _startLevelText.text = "Level: " + _gameManager.CurrentLevel;
         _winText.gameObject.SetActive(false);
         _loseText.gameObject.SetActive(false);
         _nextLevelButton.gameObject.SetActive(false);

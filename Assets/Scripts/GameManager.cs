@@ -8,25 +8,55 @@ public class GameManager : MonoBehaviour
     private float _startingTime = 60f;
 
     [SerializeField]
-    private int _currentLevel = 1;
-
-    [SerializeField]
     private UIManager _UIManager;
 
     [SerializeField]
     private ShapesManager _shapesManager;
 
+    [SerializeField]
+    private MainMenu _mainMenu;
+
     private float _currentTime = 0;
 
+    private const string _savedLevel = "savedLevel";
+    private const string _savedTime = "savedTime";
+    private const string _savedScore = "savedScore";
+
+    public int CurrentLevel;
 
     void Start()
     {
         _currentTime = _startingTime;
+
+        Load();
+
+        if (CurrentLevel == 0)
+        {
+            CurrentLevel = 1;
+            _currentTime = _startingTime;
+            _UIManager.LevelText(CurrentLevel);
+        }
     }
 
     void Update()
     {
         CountdownTimer();
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            print(_shapesManager.Score);
+            print(CurrentLevel);
+        }
+
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            Save();
+        }
+
+        else if (Input.GetKeyDown(KeyCode.L))
+        {
+            Load();
+        }
     }
 
     private void CountdownTimer()
@@ -59,13 +89,13 @@ public class GameManager : MonoBehaviour
         _shapesManager.InitializeTypesOnPrefabShapesAndBonuses();
         _shapesManager.InitializeCandyAndSpawnPositions();
         _shapesManager.StartCheckForPotentialMatches();
-        _shapesManager.InitializeVariables();
+       // _shapesManager.InitializeVariables();
     }
 
     private void NextLevel()
     {
-        _currentLevel += 1;
-        _UIManager.LevelText(_currentLevel);
+        CurrentLevel ++;
+        _UIManager.LevelText(CurrentLevel);
         _UIManager.NextLevelUIReset();
         LevelUpdate();
     }
@@ -74,5 +104,34 @@ public class GameManager : MonoBehaviour
     {
         _UIManager.RestartLevelUIReset();
         LevelUpdate();
+    }
+
+    private void Save()
+    {
+        PlayerPrefs.SetInt(_savedLevel, CurrentLevel);
+        PlayerPrefs.SetFloat(_savedTime, _currentTime);
+        PlayerPrefs.SetInt(_savedScore, _shapesManager.Score);
+    }
+
+    private void Load()
+    {
+        CurrentLevel = PlayerPrefs.GetInt(_savedLevel,1);
+        _currentTime = PlayerPrefs.GetFloat(_savedTime,60f);
+        _shapesManager.Score = PlayerPrefs.GetInt(_savedScore,0);
+        _UIManager.LevelText(CurrentLevel);
+        _shapesManager.ShowScore();
+    }
+
+    public void ExitWithSave()
+    {
+        Save();
+        Time.timeScale = 1;
+        _mainMenu.LoadMainMenu();
+    }
+
+    public void ExitWithoutSave()
+    {
+        Time.timeScale = 1;
+        _mainMenu.LoadMainMenu();
     }
 }
