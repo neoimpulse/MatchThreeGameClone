@@ -2085,6 +2085,8 @@ MonoBehaviour:
   - {fileID: 195492, guid: 4ee919a3cb1ff3448ae1b4c056dd8c35, type: 3}
   - {fileID: 125858, guid: 5268d9197b90bc44492e32f316fa679e, type: 3}
   - {fileID: 123910, guid: 1d881f16d2f366c46afb3f9e9b96654f, type: 3}
+  EnhanceExplosionPrefab: {fileID: 8320345625532399510, guid: f5b12a3a941e1e244a441e2004a0b342,
+    type: 3}
   BonusPrefabs:
   - {fileID: 114848, guid: 0cffe7839950f2d4c8ec4e7f3e18e4c6, type: 3}
   - {fileID: 164388, guid: ddfddbe43693aa54c94149217791f7bd, type: 3}
