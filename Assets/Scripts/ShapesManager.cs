@@ -31,6 +31,8 @@ public class ShapesManager : MonoBehaviour
     public GameObject[] CandyPrefabs;
     public GameObject[] ExplosionPrefabs;
     public GameObject[] BonusPrefabs;
+    public GameObject EnhanceExplosionPrefab;
+    public GameObject FireworksPrefab;
 
     private IEnumerator CheckPotentialMatchesCoroutine;
     private IEnumerator AnimatePotentialMatchesCoroutine;
@@ -411,6 +413,9 @@ public class ShapesManager : MonoBehaviour
     {
         GameObject explosion = GetRandomExplosion();
         var newExplosion = Instantiate(explosion, item.transform.position, Quaternion.identity) as GameObject;
+        var ExplosionFireworksLocation = new Vector3 (0, 0, 0);
+        Instantiate(EnhanceExplosionPrefab, ExplosionFireworksLocation, Quaternion.identity);
+        Instantiate(FireworksPrefab, ExplosionFireworksLocation, Quaternion.identity);
         Destroy(newExplosion, Constants.ExplosionDuration);
         Destroy(item);
     }
