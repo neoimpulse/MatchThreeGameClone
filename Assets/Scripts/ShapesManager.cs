@@ -7,13 +7,20 @@ using UnityEngine.UI;
 
 public class ShapesManager : MonoBehaviour
 {
+    [SerializeField]
+    private UIManager _uiManager;
+
+    [SerializeField]
+    private GameManager _gameManager;
+
+    public int Score;
     public Text DebugText, ScoreText;
     public bool ShowDebugInfo = false;
     //candy graphics taken from http://opengameart.org/content/candy-pack-1
 
     public ShapesArray shapes;
 
-    private int score;
+    
 
     public readonly Vector2 BottomRight = new Vector2(-2.37f, -4.27f);
     public readonly Vector2 CandySize = new Vector2(0.7f, 0.7f);
@@ -32,7 +39,6 @@ public class ShapesManager : MonoBehaviour
 
     public SoundManager soundManager;
 
-    private UIManager _uiManager;
 
     void Awake()
     {
@@ -47,20 +53,13 @@ public class ShapesManager : MonoBehaviour
         InitializeCandyAndSpawnPositions();
 
         StartCheckForPotentialMatches();
-
-        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
-        if (_uiManager == null)
-        {
-            Debug.LogError("UI Manager is NUll");
-        }
-
         
     }
 
     /// <summary>
     /// Initialize shapes
     /// </summary>
-    private void InitializeTypesOnPrefabShapesAndBonuses()
+    public void InitializeTypesOnPrefabShapesAndBonuses()
     {
         //just assign the name of the prefab
         foreach (var item in CandyPrefabs)
@@ -113,6 +112,7 @@ public class ShapesManager : MonoBehaviour
             DestroyAllCandy();
 
         shapes = new ShapesArray();
+       
         SpawnPositions = new Vector2[Constants.Columns];
 
         for (int row = 0; row < Constants.Rows; row++)
@@ -424,28 +424,29 @@ public class ShapesManager : MonoBehaviour
         return CandyPrefabs[Random.Range(0, CandyPrefabs.Length)];
     }
 
-    private void InitializeVariables()
+    public void InitializeVariables()
     {
-        score = 0;
+        Score = 0;
         ShowScore();
     }
 
     private void IncreaseScore(int amount)
     {
-        score += amount;
+        Score += amount;
         ShowScore();
 
-        if(score >= 10000)
+        if(Score >= 10000)
         {
             Debug.Log("Player Wins!");
-            PlayerWins();
+            _gameManager.WinState();
 
         }
     }
 
-    private void ShowScore()
+
+    public void ShowScore()
     {
-        ScoreText.text = "Score: " + score.ToString();
+        ScoreText.text = "Score: " + Score.ToString();
     }
 
     /// <summary>
@@ -476,7 +477,7 @@ public class ShapesManager : MonoBehaviour
     /// <summary>
     /// Starts the coroutines, keeping a reference to stop later
     /// </summary>
-    private void StartCheckForPotentialMatches()
+    public void StartCheckForPotentialMatches()
     {
         StopCheckForPotentialMatches();
         //get a reference to stop it later
@@ -560,11 +561,6 @@ public class ShapesManager : MonoBehaviour
         }
 
         throw new System.Exception("Wrong type, check your premade level");
-    }
-
-    private void PlayerWins()
-    {
-        _uiManager.PlayerWinsSequence();
     }
 
 

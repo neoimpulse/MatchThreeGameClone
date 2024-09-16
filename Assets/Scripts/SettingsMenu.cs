@@ -7,21 +7,8 @@ using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
-
-    public AudioMixer audioMixer;
-    //public Slider volumeSlider;
-
-    /*private void Start()
-    {
-        volumeSlider.value = PlayerPrefs.GetFloat("volume", 0.75f);
-    }
-
-    public void SetVolume(float volume)
-    {
-        audioMixer.SetFloat("volume", volume);
-    }
-    */
-
+    [SerializeField]
+    private AudioMixer audioMixer;
  
     public void SetVolume(float volume)
     {

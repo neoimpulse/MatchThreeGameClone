@@ -5,19 +5,28 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public void LoadMainGame()
+    private const int _titleMenu = 0;
+    private const int _mainGame = 1;
+    private const int _settingsMenu = 2;
+
+    public void LoadMainMenu()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(_titleMenu);
+    }
+
+    public void ContinueMainGame()
+    {
+        SceneManager.LoadScene(_mainGame);
+    }
+
+    public void StartNewGame()
+    {
+        PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene(_mainGame);
     }
 
     public void LoadSettingsMenu()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(_settingsMenu);
     }
-
-    public void LoadMainMenu()
-    {
-        SceneManager.LoadScene(0);
-    }
-
 }
